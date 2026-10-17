@@ -205,8 +205,8 @@ export function ThreeOrb() {
       const isMobile = window.innerWidth < 700
       const heroFade = Math.max(0, 1 - scrollProgress * 1.8)
       group.scale.setScalar((isMobile ? 0.58 : 0.82) + scrollProgress * 0.42)
-      group.position.x = (isMobile ? 1.28 : 1.65) + scrollProgress * 0.62
-      group.position.y = 0.08 - scrollProgress * 0.62
+      group.position.x = isMobile ? 0 : 1.65 + scrollProgress * 0.62
+      group.position.y = isMobile ? 0.04 - scrollProgress * 0.28 : 0.08 - scrollProgress * 0.62
       renderer.domElement.style.opacity = String(0.54 + scrollProgress * 0.12)
       renderer.domElement.style.setProperty('--hero-fade', String(heroFade))
       renderer.render(scene, camera)
