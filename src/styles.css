@@ -408,6 +408,15 @@ main>section:target{padding-block-start:28px}
   .voice-message{max-height:18svh;overflow-y:auto;font-size:13px}
 }
 
+/* Prevent any decorative layer or fixed widget from widening the phone page. */
+html,body,#root{width:100%;max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
+body{min-width:0}
+img,svg,canvas{max-width:100%}
+@media(max-width:800px), (pointer:coarse){
+  .voice-agent{position:fixed!important;right:max(12px,env(safe-area-inset-right))!important;bottom:max(12px,env(safe-area-inset-bottom))!important;z-index:40;visibility:visible;opacity:1;transform:none}
+  .voice-launch{visibility:visible;opacity:1;touch-action:manipulation}
+}
+
 /* Keep the voice assistant anchored to the bottom-right and out of the main view. */
 .voice-panel{backdrop-filter:blur(10px)}
 @media(max-width:600px){
