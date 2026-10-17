@@ -16,7 +16,9 @@ export function ThreeOrb() {
       return undefined
     }
 
-    const getRenderScale = () => window.innerWidth < 700 ? 0.72 : 0.9
+    // Keep the canvas at native or near-native resolution; sub-1x scales look
+    // noticeably soft when stretched across modern phone screens.
+    const getRenderScale = () => window.innerWidth < 700 ? 1.15 : 1
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, getRenderScale()))
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.domElement.setAttribute('aria-hidden', 'true')

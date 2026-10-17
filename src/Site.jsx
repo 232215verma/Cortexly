@@ -10,7 +10,7 @@ const services = [
 const nav = [['Home','#home'],['Services','#services'],['Pricing','#pricing'],['Projects','#projects'],['Approach','#approach'],['About','#about'],['Contact','#contact']]
 
 function VoiceAssistant() {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(() => window.innerWidth > 600)
   const [listening, setListening] = useState(false)
   const [message, setMessage] = useState('Ask me about Cortexly, our websites, or AI agents.')
   const [supported, setSupported] = useState(true)
@@ -77,7 +77,7 @@ function VoiceAssistant() {
 
   return <div className="voice-agent">
     {open && <div className="voice-panel" role="dialog" aria-label="Cortexly voice assistant"><div className="voice-panel-head"><span className="voice-orb">C</span><div><strong>Cortexly Assistant</strong><small>{listening ? 'Listening now' : 'Company information · Hindi & English'}</small></div><button className="voice-close" onClick={() => setOpen(false)} aria-label="Close assistant">×</button></div><p className="voice-message">{message}</p><button className={`voice-talk ${listening ? 'is-listening' : ''}`} onClick={startConversation}><span>{listening ? '●' : '🎙'}</span>{listening ? 'Listening…' : 'Ask in Hindi or English'}</button><small className="voice-hint">Your browser will ask permission to use the microphone.</small></div>}
-    <button className="voice-launch" onClick={() => { setOpen((value) => !value); if (!open) speak('Hi, I am the Cortexly assistant. Ask me about our company in English or Hindi.') }} aria-expanded={open}><span className="voice-launch-icon">{open ? '×' : '◉'}</span><span>{open ? 'Close assistant' : 'Talk to Cortexly'}</span><i className="voice-live-dot" /></button>
+    <button className="voice-launch" onClick={() => { setOpen((value) => !value); if (!open) speak('Hi, I am the Cortexly assistant. Ask me about our company in English or Hindi.') }} aria-label={open ? 'Close Cortexly assistant' : 'Open Cortexly assistant'} aria-expanded={open}><span className="voice-launch-icon">{open ? '×' : '◉'}</span><span>{open ? 'Close assistant' : 'Talk to Cortexly'}</span><i className="voice-live-dot" /></button>
   </div>
 }
 
@@ -154,7 +154,8 @@ function companyAnswer(question) {
 }
 
 function Header() {
-  return <header className="site-header"><div className="wrap nav"><a className="brand" href="#home" aria-label="Cortexly home"><img className="brand-symbol" src="/cortexly-icon.svg" alt="" width="32" height="32" />cortexly</a><nav className="nav-links" aria-label="Main navigation">{nav.map(([label,href])=><a key={label} href={href}>{label}</a>)}</nav><a className="nav-cta" href="#contact">Let’s talk <span>↗</span></a></div></header>
+  const [menuOpen, setMenuOpen] = useState(false)
+  return <header className="site-header"><div className="wrap nav"><a className="brand" href="#home" aria-label="Cortexly home"><img className="brand-symbol" src="/cortexly-icon.svg" alt="" width="32" height="32" />cortexly</a><nav id="mobile-navigation" className={`nav-links ${menuOpen ? 'is-open' : ''}`} aria-label="Main navigation">{nav.map(([label,href])=><a key={label} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}</nav><button className="mobile-menu-toggle" type="button" aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'} aria-controls="mobile-navigation" aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}><span/><span/><span/></button><a className="nav-cta" href="#contact" onClick={() => setMenuOpen(false)}>Let’s talk <span>↗</span></a></div></header>
 }
 
 function Hero() {
