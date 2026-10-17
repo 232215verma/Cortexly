@@ -10,7 +10,7 @@ const services = [
 const nav = [['Home','#home'],['Services','#services'],['Pricing','#pricing'],['Projects','#projects'],['Approach','#approach'],['About','#about'],['Contact','#contact']]
 
 function VoiceAssistant() {
-  const [open, setOpen] = useState(() => window.innerWidth > 600)
+  const [open, setOpen] = useState(() => window.innerWidth > 600 && !window.matchMedia('(pointer: coarse)').matches)
   const [listening, setListening] = useState(false)
   const [message, setMessage] = useState('Ask me about Cortexly, our websites, or AI agents.')
   const [supported, setSupported] = useState(true)

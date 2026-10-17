@@ -373,6 +373,41 @@ main>section:target{padding-block-start:28px}
 @keyframes mobileNavEnter{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){@keyframes mobileNavEnter{from{opacity:1;transform:none}to{opacity:1;transform:none}}}
 
+/* A phone in landscape can be wider than desktop breakpoints: keep phone UI. */
+@media (pointer:coarse) and (orientation:landscape) and (max-height:600px){
+  html{scroll-padding-top:76px}
+  .site-header .nav{position:relative;display:flex;flex-wrap:nowrap;width:calc(100% - 32px);min-height:66px;padding:7px 0;gap:10px}
+  .site-header .brand{order:0;margin-right:auto;font-size:21px}
+  .site-header .nav-cta{order:2;padding:8px 12px;font-size:12px}
+  .site-header .mobile-menu-toggle{order:1;display:flex;align-items:center;justify-content:center;gap:4px;width:42px;height:42px;flex:0 0 42px;padding:0;border:1px solid #ffffff22;border-radius:11px;background:linear-gradient(145deg,#18191b,#0d0e10);box-shadow:0 5px 18px #0005;cursor:pointer}
+  .site-header .mobile-menu-toggle span{width:4px;height:4px;border-radius:50%;background:#d4d6da;transition:transform .24s ease,background .24s ease}
+  .site-header .mobile-menu-toggle:hover,.site-header .mobile-menu-toggle[aria-expanded="true"]{border-color:#d4d6da55;background:#202124}
+  .site-header .mobile-menu-toggle:hover span{background:#fff}
+  .site-header .mobile-menu-toggle:hover span:nth-child(1){transform:translateY(-2px)}
+  .site-header .mobile-menu-toggle:hover span:nth-child(3){transform:translateY(2px)}
+  .site-header .mobile-menu-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(4px) scale(.8)}
+  .site-header .mobile-menu-toggle[aria-expanded="true"] span:nth-child(2){transform:scale(1.25);background:#fff}
+  .site-header .mobile-menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-4px) scale(.8)}
+  .site-header .nav-links,.site-header .nav-links.is-open{position:absolute;top:calc(100% + 1px);left:0;right:0;order:3;width:auto;max-height:calc(100svh - 78px);overflow:auto;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:10px;border:1px solid #ffffff16;border-top:0;border-radius:0 0 12px 12px;background:#08090bf7;box-shadow:0 16px 34px #000b}
+  .site-header .nav-links{display:none}
+  .site-header .nav-links.is-open{display:grid;animation:mobileNavEnter .2s ease-out both}
+  .site-header .nav-links a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px;border:1px solid #ffffff0d;border-radius:8px;font-size:13px}
+  .hero{display:grid;grid-template-columns:1fr;gap:0;min-height:0;padding:22px 0 30px}
+  .hero-visual{grid-row:1;height:190px;min-height:0}
+  .hero-copy-wrap{grid-row:2}
+  h1{font-size:clamp(38px,7vw,54px);letter-spacing:-2.5px;line-height:1.02;margin:12px 0}
+  .hero-copy{max-width:620px;font-size:16px;line-height:1.65}
+  .section{padding-top:48px;padding-bottom:48px}
+  .standalone-page{padding-top:34px;min-height:0}
+  .page-title,.section h2{font-size:clamp(36px,5vw,48px);letter-spacing:-1.6px}
+  .contact-page{padding-top:38px;padding-bottom:48px;gap:22px}
+  .voice-agent{position:fixed;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:35}
+  .voice-launch{width:48px;height:48px;min-height:48px;padding:0;justify-content:center;border-radius:50%;gap:0}
+  .voice-launch>span:nth-child(2),.voice-launch>.voice-live-dot{display:none}
+  .voice-panel{position:absolute;right:0;bottom:56px;width:min(320px,calc(100vw - 24px));max-height:58svh;padding:14px;overflow:auto;backdrop-filter:none}
+  .voice-message{max-height:18svh;overflow-y:auto;font-size:13px}
+}
+
 /* Keep the voice assistant anchored to the bottom-right and out of the main view. */
 .voice-panel{backdrop-filter:blur(10px)}
 @media(max-width:600px){

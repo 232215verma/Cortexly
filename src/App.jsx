@@ -18,7 +18,8 @@ export function ThreeOrb() {
 
     // Keep the canvas at native or near-native resolution; sub-1x scales look
     // noticeably soft when stretched across modern phone screens.
-    const getRenderScale = () => window.innerWidth < 700 ? 1.15 : 1
+    const isCompactViewport = () => window.innerWidth < 700 || window.matchMedia('(pointer: coarse) and (max-height: 600px)').matches
+    const getRenderScale = () => isCompactViewport() ? 1.15 : 1
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, getRenderScale()))
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.domElement.setAttribute('aria-hidden', 'true')
@@ -183,7 +184,8 @@ export function ThreeOrb() {
 
     const animate = (now) => {
       frame = requestAnimationFrame(animate)
-      const frameInterval = window.innerWidth < 700 ? 33 : 24
+      const isMobile = isCompactViewport()
+      const frameInterval = isMobile ? 33 : 24
       if (document.hidden || now - lastFrameAt < frameInterval) return
       lastFrameAt = now
       if (!reduceMotion) {
@@ -202,9 +204,8 @@ export function ThreeOrb() {
         ribbon.rotation.y += 0.0008 + scrollProgress * 0.002
         orbitRibbon.rotation.x -= 0.0007 + scrollProgress * 0.0015
       }
-      const isMobile = window.innerWidth < 700
       const heroFade = Math.max(0, 1 - scrollProgress * 1.8)
-      group.scale.setScalar((isMobile ? 0.58 : 0.82) + scrollProgress * 0.42)
+      group.scale.setScalar((isMobile ? 0.52 : 0.82) + scrollProgress * (isMobile ? 0.2 : 0.42))
       group.position.x = isMobile ? 0 : 1.65 + scrollProgress * 0.62
       group.position.y = isMobile ? 0.04 - scrollProgress * 0.28 : 0.08 - scrollProgress * 0.62
       renderer.domElement.style.opacity = String(0.54 + scrollProgress * 0.12)
