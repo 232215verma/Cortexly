@@ -295,6 +295,10 @@ body{background:#060708;color:#f0f1f3}
 .footer{border-top-color:#ffffff12}
 .service:hover,.project:hover,.price-card:hover{border-color:#d0d2d744}
 .service:after{background:radial-gradient(circle,#d3d5d909,transparent 70%)}
+/* Keep anchor navigation aligned below the sticky header; don't double the offset. */
+html{scroll-padding-top:90px}
+main>section{scroll-margin-top:0;scroll-margin-block-start:0}
+main>section:target{padding-block-start:28px}
 .brand-symbol{display:block;width:32px;height:32px;flex:0 0 auto;border-radius:9px;box-shadow:0 5px 18px #0007}
 .footer .brand-symbol{width:25px;height:25px;border-radius:7px}
 @media(max-width:600px){.brand-symbol{width:29px;height:29px}}
@@ -316,6 +320,7 @@ body{background:#060708;color:#f0f1f3}
   .section-head{margin-bottom:32px}
   .pricing-grid{gap:12px}
   .price-card{padding-left:21px;padding-right:21px}
+  html{scroll-padding-top:104px}
 }
 @media(max-width:600px){
   .hero-visual{height:clamp(235px,68vw,300px)}
@@ -324,6 +329,8 @@ body{background:#060708;color:#f0f1f3}
   .price-card li{font-size:14px}
   .contact-form{border-radius:12px}
   .orb-scene canvas{image-rendering:auto}
+  html{scroll-padding-top:108px}
+  main>section:target{padding-block-start:22px}
 }
 @media(max-width:360px){
   .brand{font-size:19px}
